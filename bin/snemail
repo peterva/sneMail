@@ -1,0 +1,39 @@
+#!/usr/bin/python
+
+import argparse
+import sys
+from snemail import *
+import itertools as IT
+
+parser = argparse.ArgumentParser(description='sneMail admin script', prog='snemailadm', version='0.1', usage='%(prog)s [-h] [-v] action target [input]', epilog="")
+parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help='list | remove | add')
+parser.add_argument('target', metavar='target', nargs='?', type=str, choices=('domain', 'forwarding', 'transport', 'user', 'all'), help='domain | forwarding | transport | user')
+parser.add_argument('input', nargs='?', type=str, default=None, help="required input to go with the 'remove' and 'add' flags. 'list' requires no input field")
+
+args = parser.parse_args()
+
+if args.action is None or args.target is None:
+	parser.print_help()
+	sys.exit(0)
+if args.target == 'all':
+	all_list()
+	sys.exit(0)
+if len(sys.argv) >= 3:
+	input = args.input
+	input = input.split(',')
+else:
+	input = None
+
+def usage():
+	print 'usage info here'
+
+targets = 'domain forwarding transport user'.split()
+actions = 'list add remove'.split()
+
+dispatch = {key:globals()['%s_%s' % key] for key in IT.product(targets, actions)}
+
+if input is not None:
+	dispatch.get((args.target, args.action), usage)(input)
+elif args.action is not None and args.target is not None:
+	parser.print_help()
+	sys.exit(0)
