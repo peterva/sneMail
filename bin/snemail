@@ -5,7 +5,7 @@ import sys
 from snemail import *
 import itertools as IT
 
-parser = argparse.ArgumentParser(description='sneMail admin script', prog='snemailadm', version='0.1', usage='%(prog)s [-h] [-v] action target [input]', epilog="")
+parser = argparse.ArgumentParser(description='sneMail admin script', prog='snemail', version='0.1', usage='%(prog)s [-h] [-v] action target [input]', epilog="")
 parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help='list | remove | add')
 parser.add_argument('target', metavar='target', nargs='?', type=str, choices=('domain', 'forwarding', 'transport', 'user', 'all'), help='domain | forwarding | transport | user')
 parser.add_argument('input', nargs='?', type=str, default=None, help="required input to go with the 'remove' and 'add' flags. 'list' requires no input field")

@@ -6,3 +6,4 @@
 
 ## WISH-LIST
 	Recursive removal of all related items in database
+	Webinterface
