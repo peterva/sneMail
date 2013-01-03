@@ -1,6 +1,4 @@
 # sneMail
-***
-
 ## MUST-DO
 	Sanity checking on input & remove statements
 
