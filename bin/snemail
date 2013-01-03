@@ -5,13 +5,22 @@ import sys
 import itertools as IT
 from snemail import *
 
-parser = argparse.ArgumentParser(description='sneMail admin script', prog='snemail', version='0.1', usage='%(prog)s [-h] [-v] action target [input]', epilog="")
-parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help='list | remove | add')
-parser.add_argument('target', metavar='target', nargs='?', type=str, choices=('domain', 'forwarding', 'transport', 'user', 'all'), help='domain | forwarding | transport | user')
+parser = argparse.ArgumentParser(
+	description='sneMail admin script',
+	prog='snemail',
+	version='0.1',
+	usage='%(prog)s [-h] [-v] [--usage] action target [input]',
+	epilog="refer to '%(prog)s usage' for examples of how to run snemail"
+	)
+parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help="list | remove | add")
+parser.add_argument('target', metavar='target', nargs='?', type=str, choices=('domain', 'forwarding', 'transport', 'user', 'all'), help="domain | forwarding | transport | user")
 parser.add_argument('input', nargs='?', type=str, default=None, help="required input to go with the 'remove' and 'add' flags. 'list' requires no input field")
-
+parser.add_argument('--usage', action='store_true', help="show usage examples for snemail")
 args = parser.parse_args()
 
+if args.usage:
+	usage()
+	sys.exit(0)
 if args.action is None or args.target is None:
 	parser.print_help()
 	sys.exit(0)

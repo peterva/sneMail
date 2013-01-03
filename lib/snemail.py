@@ -14,11 +14,23 @@ conf_pass = (config.items('database')[2])[1]
 conf_db = (config.items('database')[3])[1]
 
 def usage():
-	print "\n snemail usage examples and conventions:\n"
-	print 'snemail list all											- will list all domains, forwardings, transports and users. this is the only option that requires just 2 flags.'
-	print 'snemail add domain example.org							- will add example.org to the allowed domains in the postfix config'
-	print 'snemail remove transport example.org,127.0.0.1:25		- will add a transport to 127.0.0.1:25 for domain example.org. the transport has to be commaseparated without spaces!'
-	print "snemail add user peter@example.org,password,10000		- will add user peter@example.org to the config with password 'password' (will be crypted in db) and quota 100kb"
+	print "snemail usage examples and conventions:"
+	print "\t" + "{0:<50s} {1:40s}".format("snemail list all",
+		"- list all domains, forwardings, transports and users. this is the only option that requires just 2 flags.")
+	print "\t" + "{0:<50s} {1:40s}".format("snemail add domain example.org",
+		"- add example.org to the allowed domains in the postfix config.")
+	print "\t" + "{0:<52s} {1:40s}".format("",
+		"domain can also be a subdomain like sub.example.org")
+	print "\t" + "{0:<50s} {1:40s}".format("snemail remove transport example.org,127.0.0.1:25",
+		"- add a transport to 127.0.0.1:25 for domain example.org. the transport has to be commaseparated without spaces!")
+	print "\t" + "{0:<52s} {1:40s}".format("",
+		"read transport(5) for more information about transports in postfix")
+	print "\t" + "{0:<50s} {1:40s}".format("snemail add user user@example.org,password,10000",
+		"- add user user@example.org to the config with password 'password' and quota 100KB")
+	print "\t" + "{0:<52s} {1:40s}".format("",
+		"password is only plaintext-visible during addition, password will be crypted in the db.")
+	print "\t" + "{0:<52s} {1:40s}".format("",
+		"quota is done in bytes, so 10000 will equal to 100KB")
 
 def domain_list():
 	try:
