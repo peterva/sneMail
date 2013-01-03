@@ -2,8 +2,8 @@
 
 import argparse
 import sys
-from snemail import *
 import itertools as IT
+from snemail import *
 
 parser = argparse.ArgumentParser(description='sneMail admin script', prog='snemail', version='0.1', usage='%(prog)s [-h] [-v] action target [input]', epilog="")
 parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help='list | remove | add')

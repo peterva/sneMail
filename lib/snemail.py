@@ -2,19 +2,23 @@
 
 import MySQLdb as sql
 import sys
+import ConfigParser
 
 conn = None
-conf_server ='127.0.0.1'
-conf_user = 'mail_test'
-conf_pass = 'password'
-conf_db = 'mail_test'
+
+config = ConfigParser.SafeConfigParser(allow_no_value=True)
+config.read('/etc/snemail.conf')
+conf_server = (config.items('database')[0])[1]
+conf_user = (config.items('database')[1])[1]
+conf_pass = (config.items('database')[2])[1]
+conf_db = (config.items('database')[3])[1]
 
 def usage():
-	print '\n snemail usage examples and conventions:\n'
+	print "\n snemail usage examples and conventions:\n"
 	print 'snemail list all											- will list all domains, forwardings, transports and users. this is the only option that requires just 2 flags.'
 	print 'snemail add domain example.org							- will add example.org to the allowed domains in the postfix config'
 	print 'snemail remove transport example.org,127.0.0.1:25		- will add a transport to 127.0.0.1:25 for domain example.org. the transport has to be commaseparated without spaces!'
-	print 'snemail add user peter@example.org,password,10000		- will add user peter@example.org to the config with password 'password' (will be crypted in db) and quota 100kb'
+	print "snemail add user peter@example.org,password,10000		- will add user peter@example.org to the config with password 'password' (will be crypted in db) and quota 100kb"
 
 def domain_list():
 	try:
