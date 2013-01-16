@@ -16,7 +16,7 @@ config.read('/etc/snemail.conf')
 conf_server = (config.items('database')[1])[1]
 conf_user = (config.items('database')[0])[1]
 conf_pass = (config.items('database')[3])[1]
-conf_db = (config.items('database')[])[1]
+conf_db = (config.items('database')[2])[1]
 
 def usage():
 	print "snemail usage examples and conventions:"
