@@ -23,4 +23,4 @@ yum -q -y update
 
 echo 'Installing dependencies' 
 yum -q -y groupinstall 'Development Tools'
-yum -q -y ntp httpd mysql-server php php-mysql php-mbstring rpm-build gcc mysql-devel openssl-devel cyrus-sasl-devel pkgconfig zlib-devel phpMyAdmin pcre-devel openldap-devel postgresql-devel expect libtool-ltdl-devel openldap-servers libtool gdbm-devel pam-devel gamin-devel libidn-devel db4-devel mod_ssl telnet
+yum -q -y ntp httpd mysql-server php php-mysql php-mbstring rpm-build gcc mysql-devel openssl-devel cyrus-sasl-devel pkgconfig zlib-devel phpMyAdmin pcre-devel openldap-devel postgresql-devel expect libtool-ltdl-devel openldap-servers libtool gdbm-devel pam-devel gamin-devel libidn-devel db4-devel mod_ssl telnet ntp
