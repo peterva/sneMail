@@ -2,7 +2,7 @@
 
 # This script needs beautifying, pronto
 
-export base = `pwd`
+export BASE=`pwd`
 
 cd /tmp
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
@@ -28,10 +28,10 @@ yum -q -y groupinstall 'Development Tools'
 yum -q -y install httpd mysql-server php php-mysql php-mbstring rpm-build gcc mysql-devel openssl-devel cyrus-sasl-devel pkgconfig zlib-devel phpMyAdmin pcre-devel openldap-devel postgresql-devel expect libtool-ltdl-devel openldap-servers libtool gdbm-devel pam-devel gamin-devel libidn-devel db4-devel mod_ssl telnet ntp
 
 echo 'Installing courier-authlib'
-yum -q -y install courier-authlib*.rpm
+yum -q -y install courier-authlib*
 
 echo 'Installing courier-imap'
-yum -q -y install courier-imap*.rpm
+yum -q -y install courier-imap*
 
 echo 'Installing maildrop'
-yum -q -y install maildrop*.rpm
+yum -q -y install maildrop*
