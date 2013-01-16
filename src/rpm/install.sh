@@ -29,9 +29,13 @@ yum -q -y install httpd mysql-server php php-mysql php-mbstring rpm-build gcc my
 
 echo 'Installing courier-authlib'
 yum -q -y install $BASE/courier-authlib*
+chkconfig courier-authlib on
+/etc/init.d/courier-authlib start
 
 echo 'Installing courier-imap'
 yum -q -y install $BASE/courier-imap*
+chkconfig courier-imap on
+/etc/init.d/courier-imap start
 
 echo 'Installing maildrop'
 yum -q -y install $BASE/maildrop*
