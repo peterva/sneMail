@@ -24,3 +24,15 @@ yum -q -y update
 echo 'Installing dependencies' 
 yum -q -y groupinstall 'Development Tools'
 yum -q -y install httpd mysql-server php php-mysql php-mbstring rpm-build gcc mysql-devel openssl-devel cyrus-sasl-devel pkgconfig zlib-devel phpMyAdmin pcre-devel openldap-devel postgresql-devel expect libtool-ltdl-devel openldap-servers libtool gdbm-devel pam-devel gamin-devel libidn-devel db4-devel mod_ssl telnet ntp
+
+echo 'Installing courier-authlib'
+yum -q -y courier-authlib*.rpm
+
+echo 'Installing courier-imap'
+mkdir -p /var/cache/ccache/tmp
+chmod o+rwx /var/cache/ccache/
+chmod 777 /var/cache/ccache/tmp
+yum -q -y courier-imap*.rpm
+
+echo 'Installing maildrop'
+yum -q -y maildrop*.rpm
