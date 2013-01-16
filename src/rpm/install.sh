@@ -29,9 +29,6 @@ echo 'Installing courier-authlib'
 yum -q -y courier-authlib*.rpm
 
 echo 'Installing courier-imap'
-mkdir -p /var/cache/ccache/tmp
-chmod o+rwx /var/cache/ccache/
-chmod 777 /var/cache/ccache/tmp
 yum -q -y courier-imap*.rpm
 
 echo 'Installing maildrop'
