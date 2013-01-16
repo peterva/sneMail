@@ -37,7 +37,7 @@ def snemail_install(prefix):
 	print 'The snemail binary has been installed to ' + bintarget
 	shutil.copy2(etcsource, etctarget)
 	os.chmod(etctarget, 0700)
-	print 'The snemail config has been installed to' + etctarget + '\n'
+	print 'The snemail config has been installed to ' + etctarget + '\n'
 	print 'Continuing with packages: \n'
 	if args.os == 'ubuntu' or args.os == 'debian':
 		print 'Debian & Ubuntu are not supported yet, exiting now.' 
