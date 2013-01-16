@@ -43,7 +43,7 @@ def usage():
 targets = 'domain forwarding transport user'.split()
 actions = 'list add remove'.split()
 
-dispatch = {key:globals()['%s_%s' % key] for key in IT.product(targets, actions)}
+dispatch = dict((key,globals()['%s_%s' % key]) for key in IT.product(targets, actions))
 
 if input is not None:
 	dispatch.get((args.target, args.action), usage)(input)
