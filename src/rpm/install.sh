@@ -2,7 +2,7 @@
 
 # This script needs beautifying, pronto
 
-base = pwd
+export base = `pwd`
 
 cd /tmp
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY*
