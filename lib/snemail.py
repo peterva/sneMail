@@ -11,7 +11,7 @@ with warnings.catch_warnings():
 
 conn = None
 
-config = ConfigParser.SafeConfigParser(allow_no_value=True)
+config = ConfigParser.SafeConfigParser()
 config.read('/etc/snemail.conf')
 conf_server = (config.items('database')[0])[1]
 conf_user = (config.items('database')[1])[1]
