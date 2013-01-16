@@ -13,8 +13,7 @@ with warnings.catch_warnings():
 parser = argparse.ArgumentParser(
 	description='sneMail admin script',
 	prog='snemail',
-	version='0.1',
-	usage='%(prog)s [-h] [-v] [--usage] action target [input]',
+	usage='%(prog)s [-h] [--usage] action target [input]',
 	epilog="refer to '%(prog)s usage' for examples of how to run snemail"
 	)
 parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help="list | remove | add")

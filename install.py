@@ -8,7 +8,7 @@ with warnings.catch_warnings():
 	warnings.filterwarnings("ignore",category=DeprecationWarning)
 	import md5, sha
 
-parser = argparse.ArgumentParser(description='sneMail install script', prog='install.py', version='0.1', usage='%(prog)s [-h] [-v]',
+parser = argparse.ArgumentParser(description='sneMail install script', prog='install.py', usage='%(prog)s [-h]',
 	epilog='Also refer to the README file for more info')
 action = parser.add_mutually_exclusive_group(required=False)
 action.add_argument('--install', action='store_true', help='will install all the files in the correct place')
