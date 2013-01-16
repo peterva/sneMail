@@ -1,7 +1,12 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import sys, os, shutil
 import argparse
+import warnings
+
+with warnings.catch_warnings():
+	warnings.filterwarnings("ignore",category=DeprecationWarning)
+	import md5, sha
 
 parser = argparse.ArgumentParser(description='sneMail install script', prog='install.py', version='0.1', usage='%(prog)s [-h] [-v]',
 	epilog='Also refer to the README file for more info')

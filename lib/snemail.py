@@ -1,8 +1,13 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import MySQLdb as sql
 import sys
 import ConfigParser
+import warnings
+
+with warnings.catch_warnings():
+	warnings.filterwarnings("ignore",category=DeprecationWarning)
+	import md5, sha
 
 conn = None
 
