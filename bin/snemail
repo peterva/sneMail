@@ -23,7 +23,7 @@ def usage():
 actions = 'list add remove'.split()
 targets = 'domain forwarding transport user all'.split()
 
-dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(targets, actions))
+dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(actions, targets))
 
 if args.entry is not None:
 	dispatch.get((args.action, args.target), usage)(args.entry)
