@@ -25,15 +25,15 @@ args = parser.parse_args()
 if args.usage:
 	usage()
 	sys.exit(0)
-if args.action is None or args.target is None:
-	parser.print_help()
-	sys.exit(0)
 if args.target == 'all':
 	all_list()
 	sys.exit(0)
 if len(sys.argv) >= 3:
 	input = args.input
 	input = input.split(',')
+if args.action is None or args.target is None:
+    parser.print_help()
+    sys.exit(0)
 else:
 	input = None
 
