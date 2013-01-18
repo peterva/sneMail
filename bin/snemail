@@ -26,7 +26,7 @@ targets = 'domain forwarding transport user all'.split()
 dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(targets, actions))
 
 if args.entry is not None:
-	dispatch.get((args.target, args.action), usage)(args.entry)
+	dispatch.get((args.action, args.target), usage)(args.entry)
 elif args.action is not None and args.target is not None:
 	parser.print_help()
 	sys.exit(0)
