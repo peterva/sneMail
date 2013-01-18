@@ -6,11 +6,11 @@ import sys
 from snemail import *
 
 parser = argparse.ArgumentParser(
-	description='sneMail admin script',
-	prog='snemail',
-	usage='%(prog)s [-h] [--usage] action target [entry]',
-	epilog="refer to '%(prog)s usage' for examples of how to run snemail"
-	)
+        description='sneMail admin script',
+        prog='snemail',
+        usage='%(prog)s [-h] [--usage] action target [entry]',
+        epilog="refer to '%(prog)s usage' for examples of how to run snemail"
+        )
 parser.add_argument('action', metavar='action', nargs='?', type=str, choices=('list', 'add', 'remove'), help="list | remove | add")
 parser.add_argument('target', metavar='target', nargs='?', type=str, choices=('domain', 'forwarding', 'transport', 'user', 'all'), help="domain | forwarding | transport | user | all")
 parser.add_argument('entry', nargs='?', type=str, default=None, help="required input to go with the 'remove' and 'add' flags. 'list' requires no input field")
@@ -18,18 +18,23 @@ parser.add_argument('--usage', action='store_true', help="show usage examples fo
 args = parser.parse_args()
 
 def usage():
-	print 'usage info here'
+        print 'usage info here'
 
 actions = 'list add remove'.split()
-targets = 'domain forwarding transport user all'.split()
+targets = 'domain forwarding transport user'.split()
 
 dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(actions, targets))
 
+# args.entry def
+
+print args.entry
+
 if args.entry is not None:
-	dispatch.get((args.action, args.target), usage)(args.entry)
-elif args.action is not None and args.target is not None:
-	parser.print_help()
-	sys.exit(0)
+        dispatch.get((args.action, args.target), usage)(args.entry)
+elif args.action == 'list' and args.target == 'all':
+        list_all()
+elif args.action == 'list' and args.target != 'all':
+        dispatch.get((args.action, args.target), usage)()
 
 if args.usage:
-	parser.print_help()
+        parser.print_help()
