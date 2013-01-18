@@ -32,7 +32,7 @@ def usage():
 	print "\t" + "{0:<52s} {1:40s}".format("",
 		"quota is done in bytes, so 10000 will equal to 100KB")
 
-def domain_list():
+def list_domain():
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
@@ -53,7 +53,7 @@ def domain_list():
 		if conn:
 			conn.close()
 
-def forwarding_list():
+def list_forwarding():
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
@@ -75,7 +75,7 @@ def forwarding_list():
 		if conn:
 			conn.close()
 
-def transport_list():
+def list_transport():
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
@@ -97,7 +97,7 @@ def transport_list():
 		if conn:
 			conn.close()
 
-def user_list():
+def list_user():
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
@@ -119,21 +119,21 @@ def user_list():
 		if conn:
 			conn.close()
 
-def all_list():
-	domain_list()
-	forwarding_list()
-	transport_list()
-	user_list()
+def list_all():
+	list_domain()
+	list_forwarding()
+	list_transport()
+	list_user()
 
-def domain_add(input):
+def add_domain(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""INSERT INTO domains VALUES (%s)""", (input))
+		cur.execute("""INSERT INTO domains VALUES (%s)""", (entry))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Domain " + input[0] + " has been added to the database"
+			print "Domain " + entry[0] + " has been added to the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -144,15 +144,15 @@ def domain_add(input):
 		if conn:
 			conn.close()
 
-def domain_remove(input):
+def remove_domain(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""DELETE FROM domains WHERE domain=(%s)""", (input))
+		cur.execute("""DELETE FROM domains WHERE domain=(%s)""", (entry))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1:
-			print "Domain " + input[0] + " has been removed from the database"
+			print "Domain " + entry[0] + " has been removed from the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -163,15 +163,15 @@ def domain_remove(input):
 		if conn:
 			conn.close()
 
-def forwarding_add(input):
+def add_forwarding(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""INSERT INTO forwardings VALUES (%s,%s)""", (input[0],input[1]))
+		cur.execute("""INSERT INTO forwardings VALUES (%s,%s)""", (entry[0],entry[1]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Forwarding from " + input[0] + " to " + input[1] + " has been added to the database"
+			print "Forwarding from " + entry[0] + " to " + entry[1] + " has been added to the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -182,15 +182,15 @@ def forwarding_add(input):
 		if conn:
 			conn.close()
 
-def forwarding_remove(input):
+def remove_forwarding(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""DELETE FROM forwardings WHERE source=(%s) AND destination=(%s)""", (input[0],input[1]))
+		cur.execute("""DELETE FROM forwardings WHERE source=(%s) AND destination=(%s)""", (entry[0],entry[1]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Forwarding from " + input[0] + " to " + input[1] + " has been removed from the database"
+			print "Forwarding from " + entry[0] + " to " + entry[1] + " has been removed from the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -201,15 +201,15 @@ def forwarding_remove(input):
 		if conn:
 			conn.close()
 
-def transport_add(input):
+def add_transport(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""INSERT INTO transport VALUES (%s,%s)""", (input[0],input[1]))
+		cur.execute("""INSERT INTO transport VALUES (%s,%s)""", (entry[0],entry[1]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Transport from " + input[0] + " has been set to " + input[1] + " and has been added to the database"
+			print "Transport from " + entry[0] + " has been set to " + entry[1] + " and has been added to the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -220,15 +220,15 @@ def transport_add(input):
 		if conn:
 			conn.close()
 
-def transport_remove(input):
+def remove_transport(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""DELETE FROM transport WHERE domain=(%s) AND transport=(%s)""", (input[0],input[1]))
+		cur.execute("""DELETE FROM transport WHERE domain=(%s) AND transport=(%s)""", (entry[0],entry[1]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Transport for domain " + input[0] + " has been removed from the database"
+			print "Transport for domain " + entry[0] + " has been removed from the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -239,15 +239,15 @@ def transport_remove(input):
 		if conn:
 			conn.close()
 
-def user_add(input):
+def add_user(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""INSERT INTO users VALUES (%s,ENCRYPT(%s),%s)""", (input[0],input[1],input[2]))
+		cur.execute("""INSERT INTO users VALUES (%s,ENCRYPT(%s),%s)""", (entry[0],entry[1],entry[2]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "User " + input[0] + " has been added with password " + input[1] + " and quota: " + input[2]
+			print "User " + entry[0] + " has been added with password " + entry[1] + " and quota: " + entry[2]
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -258,15 +258,15 @@ def user_add(input):
 		if conn:
 			conn.close()
 
-def user_remove(input):
+def remove_user(entry):
 	try:
 		conn = sql.connect(conf_server, conf_user, conf_pass, conf_db);
 		cur = conn.cursor()
-		cur.execute("""DELETE FROM users WHERE email=(%s)""", (input[0]))
+		cur.execute("""DELETE FROM users WHERE email=(%s)""", (entry[0]))
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "User " + input[0] + " has been removed from the database. Maildir is kept intact and in place."
+			print "User " + entry[0] + " has been removed from the database. Maildir is kept intact and in place."
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
