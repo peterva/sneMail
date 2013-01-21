@@ -17,24 +17,20 @@ parser.add_argument('entry', nargs='?', type=str, default=None, help="required i
 parser.add_argument('--usage', action='store_true', help="show usage examples for snemail")
 args = parser.parse_args()
 
-def usage():
-        print 'usage info here'
-
 actions = 'list add remove'.split()
 targets = 'domain forwarding transport user'.split()
-
 dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(actions, targets))
 
-# args.entry def
+print sys.argv
 
-print args.entry
-
+if len(sys.argv) == 1:
+        parser.print_help()
 if args.entry is not None:
+        args.entry = sys.argv[3].split(',')
         dispatch.get((args.action, args.target), usage)(args.entry)
-elif args.action == 'list' and args.target == 'all':
+if args.action == 'list' and args.target == 'all':
         list_all()
 elif args.action == 'list' and args.target != 'all':
         dispatch.get((args.action, args.target), usage)()
-
 if args.usage:
-        parser.print_help()
+        usage()

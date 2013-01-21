@@ -133,7 +133,7 @@ def add_domain(entry):
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1: 
-			print "Domain " + entry[0] + " has been added to the database"
+			print "Domain " + entry + " has been added to the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
@@ -152,7 +152,7 @@ def remove_domain(entry):
 		if cur.rowcount == 0:
 			print "No changes have been made to the database"
 		elif cur.rowcount == 1:
-			print "Domain " + entry[0] + " has been removed from the database"
+			print "Domain " + entry + " has been removed from the database"
 		else:
 			print 'Unexpected number of rows changed: " + cur.rowcount'
 	except sql.Error, e:
