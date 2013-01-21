@@ -6,7 +6,7 @@ from ConfigParser import SafeConfigParser
 
 conn = None
 
-parser = ConfigParser.SafeConfigParser()
+parser = SafeConfigParser()
 parser.read('/etc/snemail.conf')
 conf_server = parser.get('database', 'server')
 conf_user = parser.get('database', 'user')
