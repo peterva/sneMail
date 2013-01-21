@@ -2,7 +2,7 @@
 
 import MySQLdb as sql
 import sys
-for ConfigParser import SafeConfigParser()
+from ConfigParser import SafeConfigParser()
 
 conn = None
 
