@@ -2,7 +2,6 @@
 
 import argparse
 import itertools
-import sys
 from snemail import *
 
 parser = argparse.ArgumentParser(
@@ -20,8 +19,6 @@ args = parser.parse_args()
 actions = 'list add remove'.split()
 targets = 'domain forwarding transport user'.split()
 dispatch = dict((key,globals()['%s_%s' % key]) for key in itertools.product(actions, targets))
-
-print sys.argv
 
 if len(sys.argv) == 1:
         parser.print_help()
