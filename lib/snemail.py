@@ -2,16 +2,16 @@
 
 import MySQLdb as sql
 import sys
-import ConfigParser
+for ConfigParser import SafeConfigParser()
 
 conn = None
 
-config = ConfigParser.SafeConfigParser()
-config.read('/etc/snemail.conf')
-conf_server = (config.items('database')[1])[1]
-conf_user = (config.items('database')[0])[1]
-conf_pass = (config.items('database')[3])[1]
-conf_db = (config.items('database')[2])[1]
+parser = ConfigParser.SafeConfigParser()
+parser.read('/etc/snemail.conf')
+conf_server = parser.get('database', 'server')
+conf_user = parser.get('database', 'user')
+conf_pass = parser.get('database', 'password')
+conf_db = parser.get('database', 'database')
 
 def usage():
 	print "snemail usage examples and conventions:"
